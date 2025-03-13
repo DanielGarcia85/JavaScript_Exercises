@@ -1,5 +1,6 @@
 # JavaScript Learning Exercises
 This repository contains a series of exercises designed to help learn JavaScript, covering syntax, DOM manipulation, event handling, AJAX, asynchronous programming, and object-oriented JavaScript.  
+    
 It was created as part of the course ***64-31 Internet Programming*** at **Haute École de Gestion (HEG)**.
 
 ## Features
