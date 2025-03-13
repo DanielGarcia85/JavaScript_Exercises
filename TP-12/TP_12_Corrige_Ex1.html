@@ -1,0 +1,34 @@
+<meta charset="utf-8">
+<script>
+    // Exercice 1 - Création d'une promesse
+    const p = nom => new Promise((reussi, echec)=>{
+        // Délai de réponse entre 500 et 2000 ms
+        const delai = 500 + Math.round(Math.random()*1500);
+        // Timer pour la réponse
+        setTimeout(_=>{
+            // 80% = réussite, 20% = échec
+            if (Math.random()<0.8) {
+                reussi(`${nom} réussi`);
+            } else {
+                echec(`${nom} échec`);
+            }          
+        }, delai)
+    })
+
+
+// Exercice 1 - Appeler la promesse pour test
+p("Test 1")
+.then(res=>console.log(res))
+.catch(erreur=>console.warn(erreur))
+
+// Exercice 2 - Appeler la promesse plusieurs fois et afficher le résultat final
+Promise.all([p("Test 2 - A"), p("Test 2 - B"),p("Test 2 - C")])
+.then(res=>console.log(res))
+.catch(erreur=>console.warn(erreur))
+
+// Exercice 3 - Appeler la promesse plusieurs fois et afficher le résultat final de la première 
+Promise.race([p("Test 3 - A"), p("Test 3 - B"),p("Test 3 - C")])
+.then(res=>console.log(res))
+.catch(erreur=>console.warn(erreur))
+
+</script>

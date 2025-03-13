@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Demo Requete</title>
+</head>
+<body>
+    <h1>Demo Requete</h1>
+    <ul id="list"></ul>
+
+</body>
+<script>
+    // lancer une requête http
+    fetch('http://127.0.0.1:8000/api/haircuts', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer 5|5xQYXPMCVidYi83wJuLdb3c0Q5N7Wyck2nSfzHYNd0b5f44a',
+            'Content-Type': 'application/json'
+        }
+    })
+    // Lorsqu'elle sera terminée
+    .then(response => {
+        // Lancer une requete de transformation du resultat en json
+        return response.json()
+    })
+    // Lorsque la transformation sera terminée
+    .then(json => {
+        
+        json.forEach(element => {
+            console.log(element)
+            let li = document.createElement('li')
+            Object.keys(element).forEach(souselement => {
+                li.textContent += element[souselement] + ", "
+                list.appendChild(li)
+            })
+            //version prof
+            //let {name, email, phone} = user
+            //const li2 = document.createElement("li")
+            //li2.appendChild(document.createTextNode(`${name} ${email} ${phone}`))
+            //liste.appendChild(li2)
+        })
+    })
+    // Si une erreur apparait:
+    .catch(erreur=>console.warn(erreur))
+      
+</script>

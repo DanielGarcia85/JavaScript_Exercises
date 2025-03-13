@@ -1,0 +1,97 @@
+<h1>TP-01 Syntaxe</h1>
+
+<h2>Exercice 1-2-3</h2>
+<label for="src">Source</label>
+<input id="src">
+<label for="dst">Destination</label>
+<input id="dst">
+<button id="btn_send">Envoyer</button>
+
+<script>
+    console.log("Bonjour");
+    console.warn("Attention ! Ceci est un message de warning");
+    console.error("Erreur ! Ceci est un message d'erreur");
+
+    btn_send.addEventListener("click", btn_ok_click);
+
+    function btn_ok_click(){
+        let source = src.value;
+        console.log(source);
+        dst.value = source;
+    }
+
+    //On peut faire la même chose avec une fonction anonyme
+    //  btn_send.addEventListener("click", ()=>{
+    //      let source = src.value;
+    //      console.log(source);
+    //      dst.value = source;
+    //  });
+
+</script>
+
+<h2>Exercice 4-5</h2>
+<label for="mont_mensuel">Montant mensuel</label>
+<input id="mont_mensuel">
+<br>
+<label for="nb_annee">Nombre d'année</label>
+<input id="nb_annee">
+<br>
+<button id="btn_calcule">Calculer</button>
+<br>
+<!-- Exercice 4
+<texte>Votre épargne total sera de : <span id="spn_epargne"></span></texte>-->
+<span id="spn_epargne"></span>
+
+<script>
+     btn_calcule.addEventListener("click", btn_calcule_click);
+
+    function btn_calcule_click(){
+        let montant_mensuel = mont_mensuel.value;
+        let nombre_annee = nb_annee.value;
+        let resultat = montant_mensuel * 12 * nombre_annee;
+        //Exercice 4
+        //spn_epargne.innerHTML = resultat;
+        spn.innerHTML = `En épargnant ${montant_mensuel} CHF par mois pendant ${nombre_annee} années, vous disposerez d'un total de ${resultat}`;
+    }
+</script>
+
+<h2>Exercice 6</h2>
+<label for="montant">Montant</label>
+<input id="montant">
+<select id="devise">
+    <option value="eur">Euro</option>
+    <option value="usd">USD</option>
+</select>
+<button id="btn_convertir">Convertir</button>
+<br>
+<label for="resultat">Resultat</label>
+<input id="resultat"></output>
+<br>
+<div id="resultat2"></div>
+
+<script>
+    btn_convertir.addEventListener("click", btn_convertir_click);
+
+    function btn_convertir_click() {
+        const tauxEuro = 2;
+        const tauxUsd = 3;
+        let mont = montant.value;
+        let dev = devise.value;
+        let res;
+        let taux;
+        switch (dev) {
+            case "eur":
+                res = mont * tauxEuro;
+                taux = tauxEuro;
+                break;
+            case "usd":
+                res = mont * tauxUsd;
+                taux = tauxUsd;
+                break;
+        }
+        resultat.value = res; 
+        resultat2.innerHTML=`Le montant converti est de ${mont*taux}`
+    }
+
+</script>
+

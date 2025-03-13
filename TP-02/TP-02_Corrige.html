@@ -1,0 +1,80 @@
+<meta charset="utf-8">
+
+<h3>Exercice 1</h3>
+<input id="nb1" placeholder="Nombre 1" />
+<input id="nb2" placeholder="Nombre 2" />
+<br>
+<button id="btnAdditionner">+</button>
+<button id="btnSoustraire">-</button>
+<button id="btnMultiplier">*</button>
+<button id="btnDiviser">/</button>
+<button id="btnReinitialiser">Réinitialiser</button>
+<br>
+Résultat : <span id="resultat"></span>
+<script>
+    btnAdditionner.addEventListener('click', additionner);
+    btnSoustraire.addEventListener('click', soustraire);
+    btnMultiplier.addEventListener('click', multiplier);
+    btnDiviser.addEventListener('click', diviser);
+    btnReinitialiser.addEventListener('click', reinitialiser);
+
+    function additionner() {
+        // Exercice 2 avec validation;
+        if (!valider()) return;
+        // Lecture
+        const nombre1 = nb1.value;
+        const nombre2 = nb2.value;
+        // Calcul
+        const res = Number(nombre1) + Number(nombre2);
+        // Affichage
+        resultat.innerHTML = res;
+    }
+
+    function soustraire() {
+        // Exercice 2 avec validation;
+        if (!valider()) return;
+        resultat.innerHTML = nb1.value - nb2.value;
+    }
+
+    function multiplier() {
+        // Exercice 2 avec validation;
+        if (!valider()) return;
+        resultat.innerHTML = nb1.value * nb2.value;
+    }
+    
+    function diviser() {
+        // Exercice 2 avec validation;
+        if (!valider(true)) return;
+
+        resultat.innerHTML = nb1.value / nb2.value;
+    }
+
+    function reinitialiser() {
+        nb1.value = "";
+        nb2.value = "";
+        resultat.innerHTML = "";
+    }
+
+    function valider(estDivision=false) {
+        if (nb1.value.length===0 || nb2.value.length===0) {
+            afficherErreur("Les deux nombres doivent être saisis");
+            return false;
+        }
+        if (isNaN(nb1.value) || isNaN(nb2.value)) {
+            afficherErreur("Les deux nombres doivent être des valeurs numériques");
+            return false;
+        }
+        if (estDivision && Number(nb2.value)===0) {
+            afficherErreur("La division par 0 n'est pas possible");
+            return false;
+        }
+        return true;
+    }
+
+    function afficherErreur(erreur) {
+        console.warn(erreur);
+        resultat.innerHTML = erreur;
+        alert(erreur);
+    }
+
+</script>

@@ -1,0 +1,31 @@
+<div id="maDiv" style="background-color: aqua;position: absolute;width: 30px;height: 20px;left: 40px;top: 50px"></div>
+<button id="btnGauche">A gauche</button>
+<button id="btnStop">Stop</button>
+<button id="btnDroite">A droite</button>
+
+<script>
+    const pas = 1
+    const delai = 10
+    let tm
+    console.log((new Date()).toLocaleTimeString())
+    btnStop.addEventListener("click", ()=>{
+        clearInterval(tm)
+    })
+    btnDroite.addEventListener("click", ()=>{
+        clearInterval(tm)
+        tm = setInterval(()=>{
+                maDiv.style.left = (parseInt(maDiv.style.left) + pas) + "px"
+            }, delai)
+        setTimeout(()=>{
+            clearInterval(tm)
+        },2000)
+    })
+    btnGauche.addEventListener("click", ()=>{
+        clearInterval(tm)
+        tm = setInterval(()=>{
+            maDiv.style.left = (parseInt(maDiv.style.left) - pas) + "px"
+        }, delai)
+        
+    })
+
+</script>

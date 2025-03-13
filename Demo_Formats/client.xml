@@ -1,0 +1,17 @@
+<clients>
+    <client>
+        <nom>Dupaaaaont</nom>
+        <prenom>Paul</prenom>
+        <telephone>022 33 333</telephone>
+    </client>
+        <client>
+        <nom>Dupont</nom>
+        <prenom>Pauline</prenom>
+        <telephone>022 44 333</telephone>
+    </client>
+        <client>
+        <nom>Dupont</nom>
+        <prenom>Paula</prenom>
+        <telephone>022 3553 333</telephone>
+    </client>
+</clients>

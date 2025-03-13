@@ -1,0 +1,71 @@
+<meta charset="utf-8"/>
+<p>
+    Fréquence: <input type="text" id="frequence" value="500"/><button id="btnEnregistrer">Enregistrer</button>
+    <br/>
+    Nombre de requêtes: <span id="nbRequetes"></span>
+    <br/>
+    Nombre d'impacts: <span id="nbImpacts"></span>
+    <br/>
+    Date du dernier impact: <span id="dernierImpact"></span>    
+</p>
+<canvas id="monCanvas" width="300" height="200" style="border: 1px grey solid;background: url('suisse.png') no-repeat center center;"></canvas>
+<br/>
+
+<script>
+    let nombre_requetes = 0;
+    let nombre_impact = 0;
+    let tm;
+
+    if (localStorage.getItem('frequence')) {
+        frequence.value = localStorage.getItem('frequence');
+    }
+
+    lancerRequetes();
+
+    btnEnregistrer.addEventListener('click', _=>{
+        localStorage.setItem('frequence', frequence.value);
+    })
+
+    frequence.addEventListener('change', _=>{
+        // Arrêter l'intervale:
+        clearInterval(tm);
+        lancerRequetes();
+    })
+
+    function lancerRequetes() {
+        tm = setInterval(_=>{
+            fetch("cc_meteo.php")
+            .then(res=>{
+                // Incrémenter le nombre de requêtes
+                nombre_requetes++;
+                // Afficher le nombre
+                nbRequetes.innerHTML = nombre_requetes;
+                // Si code 200, extraire les données:
+                if (res.status==200) return res.json();     
+                // Si code 204 (ou sinon):        
+                // "Arrêter la promesse"
+                return Promise.reject("Code 204 - Pas d'impact");
+            })
+            .then(res=>{
+                // Incrémenter le nombre d'impact
+                nombre_impact++;
+                // Afficher le nombre
+                nbImpacts.innerHTML = nombre_impact;
+                // Afficher date dernier impact
+                dernierImpact.innerHTML = res.date;
+                // Dessiner l'impact dans le canvas
+                dessinerImpact(res.impact);
+            })
+            .catch(erreur=>console.warn(erreur)) 
+        }, frequence.value);
+    }
+    function dessinerImpact(impact) {
+        let ctx = monCanvas.getContext("2d");
+        ctx.fillStyle = impact.style;
+        ctx.arc(impact.x, impact.y, impact.r, 0, Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+    }
+</script>
+
+

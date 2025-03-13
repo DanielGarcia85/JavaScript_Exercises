@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Timer</title>
+    </head>
+    <body>
+        <h1>Exercice 1</h1>
+        <span id='timer'></span>
+        <h1>Exercice 2</h1>
+        <ul id="list">
+            <li id="1" value="1">1</li>
+            <li id="2" value="2">2</li>
+            <li id="3" value="3">3</li>
+            <li id="4" value="4">4</li>
+            <li id="5" value="5">5</li>
+        </ul>
+        <h1>Exercice 3</h1>
+        <div id="vignettes">
+            <img class="vignette" src="TP_07_images/chocolat1.jpeg" width="100px"/>
+            <img class="vignette" src="TP_07_images/chocolat2.jpeg" width="100px"/>
+            <img class="vignette" src="TP_07_images/chocolat3.jpeg" width="100px"/>
+            <img class="vignette" src="TP_07_images/chocolat4.jpeg" width="100px"/>    
+        </div>
+        <h1>Exercice 4</h1>
+        <div id="button">
+            <button id="btn_start">Start</btuton>
+            <button id="btn_stop">Stop</button>
+            <button id="btn_slow">Slow</button>
+            <button id="btn_fast">Fast</button>
+        </div>
+        <br>
+        <img id="image" src="" width="300px" />
+    </body>
+    <script>
+        //Exercice 1
+        let interval = setInterval(()=>{
+                    let time = new Date().toLocaleTimeString()
+                    timer.innerHTML = time
+                }, 1000)
+        //Exercice 2
+        let interval2 = setInterval(() => {
+            if (list.firstChild) {
+                list.removeChild(list.lastChild);
+            } else {
+                clearInterval(interval2);
+            }
+        }, 50);
+        //Exercice 3
+        
+        let delai = 1000
+        let imageActuelle = 0;
+        let opacite = 1
+        let image = document.getElementById('image');
+
+        function diaporama(){
+            // Indice de la prochaine image (++ avec modulo le nombre de vignettes)
+            const listeVignettes = document.getElementsByClassName('vignette');
+            imageActuelle = (++imageActuelle) % listeVignettes.length;
+            image.src = listeVignettes[imageActuelle].src
+            image.style.opacity = opacite
+            if(opacite == 0.1) {opacite = 1}
+            opacite = Math.max(opacite - 0.1, 0.1)
+        }
+
+        let interval3 = setInterval(()=>{
+            diaporama()
+        }, delai)
+
+        //Exercice 4
+        button.addEventListener('click', (e)=>{
+            switch (e.target.id) {
+                case "btn_stop":
+                    e.preventDefault();
+                    clearInterval(interval3)
+                    break;
+                case "btn_start":
+                    e.preventDefault();
+                    clearInterval(interval3)
+                    interval3 = setInterval(diaporama, delai)
+                    break;
+                case "btn_slow":
+                    e.preventDefault();
+                    clearInterval(interval3)
+                    delai *= 2;
+                    interval3 = setInterval(diaporama, delai)
+                    break;
+                case "btn_fast":
+                    e.preventDefault();
+                    clearInterval(interval3)
+                    delai /= 2;
+                    interval3 = setInterval(diaporama, delai)
+                    break;  
+                default:
+                    // code
+                    break;
+            }
+        })
+
+    </script>

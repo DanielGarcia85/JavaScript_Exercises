@@ -1,0 +1,140 @@
+<meta charset="utf8">
+<h1>TP 5 - Corrigé</h1>
+<h2>Exercices 1, 2 et 4</h2>
+<input type="text" id="saisie">
+<button id="btnAjouter">Ajouter</button>
+<br>
+<button id="btnSupprimerPremier">Supprimer premier</button>
+<button id="btnSupprimerDernier">Supprimer dernier</button>
+<ul id="panier"></ul>
+<hr>
+<h2>Exercice 3</h2>
+<select id="marques">
+    <option></option>
+    <option>France</option>
+    <option>Suisse</option>
+</select>
+<select id="modeles"><option></option></select>
+<hr>
+<h2>Exercice 5</h2>
+<input type="text" id="operande1">
+<input type="text" id="operande2">
+<div id="operations">
+    <button data-id="additionner">+</button>
+    <button data-id="soustraire">-</button>
+    <button data-id="multiplier">*</button>
+    <button data-id="diviser">/</button>
+</div>
+Résultat: <span id="resultat"></span>
+<hr>
+<h2>Exercice 6</h2>
+<div id="vignettes">
+    <img src="TP_05_images/chocolat1.jpeg" width="100px"/>
+    <img src="TP_05_images/chocolat2.jpeg" width="100px"/>
+    <img src="TP_05_images/chocolat3.jpeg" width="100px"/>
+    <img src="TP_05_images/chocolat4.jpeg" width="100px"/>    
+</div>
+<br>
+<img id="image" src="" width="300px" />
+<script>
+    // Exercice 1
+    btnAjouter.addEventListener('click', _=>{
+        if (saisie.value.length==0) return;
+        let li = document.createElement('li');
+        li.appendChild(document.createTextNode(saisie.value));
+        panier.appendChild(li);
+    })
+
+    // Exercice 2
+    btnSupprimerPremier.addEventListener('click', _=>{
+        panier.removeChild(panier.firstChild);
+    })
+
+    btnSupprimerDernier.addEventListener('click', _=>{
+        panier.removeChild(panier.lastChild);
+    })
+
+    // Exercice 3
+    marques.addEventListener('change', _=>{
+        let listeModeles = [];
+        // Liste des villes selon le pays choisi
+        if (marques.value=="France") {
+            listeModeles.push("Bordeau");
+            listeModeles.push("Lyon");
+            listeModeles.push("Paris");          
+        } else if (marques.value =="Suisse") {
+            listeModeles.push("Berne");
+            listeModeles.push("Genève");          
+            listeModeles.push("Lausanne");
+            listeModeles.push("Zürich");            
+        }
+        // Vider la liste déroulante
+        while (modeles.hasChildNodes()) {
+            modeles.removeChild(modeles.lastChild);
+        }
+        // Ajouter l'option vide
+        modeles.appendChild(document.createElement('option'));
+        // Remplir la liste déroulante avec la liste des pays
+        listeModeles.forEach(modele=>{
+            let option = document.createElement('option');
+            let text = document.createTextNode(modele);
+            option.appendChild(text);
+            modeles.appendChild(option);
+            
+
+            //option.appendChild(document.createTextNode(modele));
+            //modeles.appendChild(option);
+            
+        })
+        
+    })
+
+    // Exercice 4
+    panier.addEventListener('click', evenement=>{
+        // Tester si le click est bien sur le li
+        if (evenement.target.nodeName==='LI'){
+            panier.removeChild(evenement.target);
+        }   
+    })
+
+    // Exercice 5
+    operations.addEventListener('click', evenement=>{
+        // Tester si le click est bien sur un des boutons
+        if (evenement.target.nodeName==='BUTTON') {
+            // Lire les opérandes
+            let a = parseInt(operande1.value);
+            let b = parseInt(operande2.value);
+            // Faire l'opération
+            switch(evenement.target.dataset.id) {
+                case 'additionner':
+                    resultat.innerHTML = a + b;
+                    break;
+                case 'soustraire':
+                    resultat.innerHTML = a - b;
+                    break;
+                case 'multiplier':
+                    resultat.innerHTML = a * b;
+                    break;
+                case 'diviser':
+                    resultat.innerHTML = a / b;
+                    break;                
+            }
+        }
+    })
+
+    // Exercice 6
+    vignettes.addEventListener('click', evenement=>{
+        // Vérifier si click sur une vignette
+        if (evenement.target.nodeName==='IMG') {
+            // Reprendre l'attribut src et l'attribuer à l'image
+            image.src=evenement.target.src;
+            // Remettre l'opacité à 100% de toutes les vignettes
+            Array.from(vignettes.children).forEach(v=>{
+                v.style.opacity = 1;
+            })            
+            // Mettre l'opacité à 50% pour la vignette
+            evenement.target.style.opacity = 0.5;
+
+        }
+    })
+</script>

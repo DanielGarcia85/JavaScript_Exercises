@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX - Sommets</title>
+    <style> body { font-family: Arial, sans-serif; } </style>
+    
+</head>
+<body>
+    <input type="text" id ="textJson_id" placeholder="Saisir recherche">Recherche Json
+    <br>
+    <input type="text" id ="textXML_id" placeholder="Saisir recherche">Recherche XML
+    <br>
+    <input type="text" id ="textCSV_id" placeholder="Saisir recherche">Recherche CSV
+    <br>
+    <div id="div_id"></div>
+</body>
+<script>
+
+    let inputJson = document.getElementById('textJson_id')
+    let inputXML = document.getElementById('textXML_id')
+    let inputCSV = document.getElementById('textCSV_id')
+    let div = document.getElementById('div_id')
+    inputJson.addEventListener ("keyup", rechercheSommetsJson)
+    inputXML.addEventListener ("keyup", rechercheSommetsXML)
+    inputCSV.addEventListener ("keyup", rechercheSommetsCSV)
+
+    function rechercheSommetsJson(){
+        inputXML.value = ""
+        inputCSV.value = ""
+        console.clear()
+        while(div.firstChild){div.removeChild(div.firstChild)}
+        let rech = inputJson.value
+        fetch(`TP11_AJAX_JSON.php?recherche=${rech}`)
+            .then(response => {
+                return response.json()
+            })
+            .then(json => {
+                console.log(json)
+                json.forEach(sommet => {
+                    console.log(sommet)
+                    const {som_id, som_nom, som_region, som_altitude} = sommet
+                    const sommetNode = document.createTextNode(`id: ${som_id}, nom: ${som_nom}, region: ${som_region}, altitude: ${som_altitude}`);
+                    div.appendChild(sommetNode)
+                    div.appendChild(document.createElement('br'))
+                })
+            })
+            .catch(erreur=>console.warn(erreur))    
+    }
+
+    function rechercheSommetsXML(){
+        inputJson.value = ""
+        inputCSV.value = ""
+        console.clear()
+        while(div.firstChild){div.removeChild(div.firstChild)}
+        let rech = inputXML.value
+        fetch(`TP11_AJAX_XML.php?recherche=${rech}`)
+            .then(response => {
+                return response.text()
+            })
+            .then(response => {
+                console.log(response)
+                let parser = new DOMParser();
+                let xml = parser.parseFromString(response, "text/xml");
+  	            return xml;    
+            })
+            .then(response => {
+                const sommets = response.getElementsByTagName('sommet')
+                Array.from(sommets).forEach(sommet => {
+                    const nom = sommet.getElementsByTagName('nom')[0].firstChild.nodeValue
+                    const region = sommet.getElementsByTagName('region')[0].firstChild.nodeValue
+                    const altitude = sommet.getAttribute('altitude')
+                    const sommetNode = document.createTextNode(`nom: ${nom}, region: ${region}, altitude: ${altitude}`)
+                    console.log(sommetNode)
+                    div.appendChild(sommetNode)
+                    div.appendChild(document.createElement('br'))
+                })
+            })
+            .catch(erreur=>console.warn(erreur))
+            
+    }
+
+    function rechercheSommetsCSV(){
+        inputJson.value = ""
+        inputXML.value = ""
+        console.clear()
+        while(div.firstChild){div.removeChild(div.firstChild)}
+        let rech = inputCSV.value
+        fetch(`TP11_AJAX_CSV.php?recherche=${rech}`)
+            .then(response => {
+                return response.text()
+            })
+            .then(response => {
+                console.log(response)
+                const sommets = response.split("\n");
+                console.log(sommets)
+                sommets.forEach(sommet => {
+                    const champs = sommet.split(";")
+                    console.log(champs)
+                    const sommetNode = document.createTextNode(`nom: ${champs[1]}, altitude: ${champs[0]},  region: ${champs[2]}`)
+                    div.appendChild(sommetNode)
+                    div.appendChild(document.createElement('br'))
+                })
+            })
+            .catch(erreur=>console.warn(erreur))
+    }
+
+</script>

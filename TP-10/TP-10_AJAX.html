@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Service Météo - AJAX</title>
+    <style> body { font-family: Arial, sans-serif; } </style>
+</head>
+
+<body>
+
+<h1>Service météo</h1>
+<h3>Météo actualisé toutes les deux secondes</h3>
+<div id="temp">Chargement...</div>
+<ul id="list"></ul>
+
+<script>
+
+    let interval = setInterval(getTemperature, 2000);
+    afficherJson()
+
+    function getTemperature(){
+        fetch('meteo.php')
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+            let res = document.getElementById('temp').innerText = data.temperature + '°C'
+            console.log(res)
+            })
+        .catch(error => {
+            document.getElementById('temp').innerText = 'Erreur';
+            console.error('Erreur:', error)
+        })
+    }
+
+    function afficherJson(){
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(json => {
+                json.forEach(el => {
+                    console.log(el);
+                    let {id, name, username, email, address} = el
+                    let li = document.createElement('li');
+                    li.textContent = `ID: ${id}, Name: ${name}, Username: ${username}, Email: ${email}, Address: ${address.street}, ${address.city}`;
+                    document.getElementById('list').appendChild(li);
+                });
+            })
+            .catch(erreur => console.warn(erreur));
+    }
+
+</script>
+
+</body>

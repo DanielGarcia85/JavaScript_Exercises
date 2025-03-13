@@ -1,0 +1,97 @@
+<body>
+    <style>
+        canvas {
+            border: 1px solid grey;
+        }
+    </style>
+    <h1>TP 09 Corrigé</h1>
+    <h2>Exercice 1</h2>
+    <canvas id="monCanvasEx1" width="200px" height="200px"></canvas>
+    <hr>
+
+    <h2>Exercice 2</h2>
+    <button id="btnDessiner">Dessiner</button>
+    <br>
+    <canvas id="monCanvasEx2"  width="200px" height="200px"></canvas>
+    <hr>
+
+    <h2>Exercice 3</h2>
+    <canvas id="monCanvasEx3"  width="200px" height="200px"></canvas>
+    <hr>
+
+    <h2>Exercice 4</h2>
+    <button id="btnAnimer">Animer</button>
+    <br>
+    <canvas id="monCanvasEx4"  width="200px" height="200px"></canvas>
+    <hr>
+
+    <script>
+        // Exercice 1
+        const ctxEx1 = monCanvasEx1.getContext("2d");
+        // Couleur du "fill"
+        ctxEx1.fillStyle = "lightseagreen";
+        // Dessine le rectangle
+        ctxEx1.fillRect(100, 20, 30, 30);
+        // Dessine une bordure (rectangle sans le fill)
+        ctxEx1.strokeRect(100, 20, 30, 30);
+
+        // Exercice 2
+        btnDessiner.addEventListener('click', _=>{
+            const ctxEx2 = monCanvasEx2.getContext("2d");
+            // Dessiner un rectanble
+            ctxEx2.fillStyle = "lightblue";
+            ctxEx2.fillRect(100, 20, 50, 25);
+            // Dessiner un cercle
+            ctxEx2.fillStyle = "lightseagreen";
+            ctxEx2.beginPath();
+            ctxEx2.arc(100, 100, 20, 0, 2*Math.PI);
+            ctxEx2.fill();
+            ctxEx2.closePath();
+            // Dessiner un triangle
+            ctxEx2.fillStyle = "orange";
+            ctxEx2.beginPath();
+            ctxEx2.moveTo(40, 150);
+            ctxEx2.lineTo(60, 190);
+            ctxEx2.lineTo(20, 190)
+            ctxEx2.lineTo(40, 150)
+            ctxEx2.fill();
+            ctxEx2.closePath();            
+        })
+
+        // Exercice 3
+        const ctxEx3 = monCanvasEx3.getContext("2d");
+        ctxEx3.beginPath();
+        ctxEx3.moveTo(30, 200);
+        let x = 30;
+        let y = 180;
+        while (x<200 && y>0) {
+            console.log(x, y);
+            ctxEx3.lineTo(x, y);
+            ctxEx3.lineTo(x+20, y);    
+            x+=20;
+            y-=20
+        }
+        ctxEx3.stroke();
+        ctxEx3.closePath();
+
+        // Exercice 4
+        btnAnimer.addEventListener('click', _=>{            
+            const ctxEx4 = monCanvasEx4.getContext("2d"); 
+            ctxEx4.fillStyle = "orange";
+            let x = 0;
+            let sens = 1;
+            const largeur = 20;
+
+            setInterval(_=>{
+                // Effacer l'affichage actuel
+                ctxEx4.clearRect(0, 0, 200, 200);
+                x+=1*sens;
+                if (x>200-largeur || x<0) {
+                    sens *=-1;
+                }
+                ctxEx4.fillRect(x, 100, largeur, 10);
+            },
+            100);
+        })
+    </script>
+</body>

@@ -1,0 +1,24 @@
+<div id="maDiv" style="background-color: aqua;position: absolute;width: 100px;height: 50px;left: 40px;top: 50px"></div>
+
+<script>
+    let modeDeplacement = false
+    let offsetLeft = 0
+    let offsetTop = 0
+    maDiv.addEventListener("mousedown", (evt)=>{
+        console.log(evt)
+        offsetLeft = evt.clientX - parseInt(maDiv.style.left)
+        offsetTop = evt.clientY - parseInt(maDiv.style.top)
+        modeDeplacement = true
+    })
+    maDiv.addEventListener("mouseup", ()=>{
+        modeDeplacement = false
+    })
+
+    document.addEventListener("mousemove", (evt)=>{
+        if (modeDeplacement) {
+            maDiv.style.left = evt.clientX - offsetLeft
+            maDiv.style.top = evt.clientY - offsetTop
+        }
+    })
+
+</script>

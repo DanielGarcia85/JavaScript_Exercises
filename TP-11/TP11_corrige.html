@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>TP 12</title>
+</head>
+<body>
+  <h2>Exercice 1</h2>
+  <input type="text" id="saisieJSON">
+  <div id="resultatJSON">
+  </div>
+  <br><br>
+  <h2>Exercice 2</h2>
+  <input type="text" id="saisieXML">
+  <div id="resultatXML">
+  </div>
+  <br><br>
+
+  <h2>Exercice 3</h2>
+  <input type="text" id="saisieCSV">
+  <div id="resultatCSV">
+  </div>
+
+</body>
+
+
+<script type="text/javascript">
+saisieJSON.addEventListener('keyup', _ =>
+{
+  fetch('TP11_AJAX_JSON.php?recherche=' + saisieJSON.value)
+  .then(res=>res.json())
+  .then(res=>
+    {
+      resultatJSON.innerHTML = '';
+      res.forEach(s=>{
+        resultatJSON.innerHTML += `${s.som_nom} ${s.som_region} ${s.som_altitude}<br>`;
+      })
+    })
+    .catch(erreur=>console.warn(erreur))
+  })
+  </script>
+
+
+  <script type="text/javascript">
+  saisieXML.addEventListener('keyup', _=>
+  {
+    fetch('TP11_AJAX_XML.php?recherche=' + saisieXML.value)
+    .then(res=>res.text())
+    .then(res=>{
+      let parser = new DOMParser();
+  	  let xml = parser.parseFromString(res, "text/xml");
+  	  return xml;
+    })
+    .then(res=>
+      {
+        resultatXML.innerHTML = ''
+        const sommets = res.getElementsByTagName('sommet');
+        Array.from(sommets).forEach(sommet=>{
+          const nom = sommet.getElementsByTagName('nom')[0].firstChild.nodeValue;
+          const region = sommet.getElementsByTagName('region')[0].firstChild.nodeValue;
+          const altitude = sommet.getAttribute('altitude');
+          resultatXML.innerHTML += `${nom} ${region} ${altitude}<br>`;
+        })
+
+      })
+      .catch(erreur=>console.warn(erreur))
+    })
+    </script>
+
+    <script type="text/javascript">
+    saisieCSV.addEventListener('keyup', _ =>
+    {
+      fetch('TP11_AJAX_CSV.php?recherche=' + saisieCSV.value)
+      .then(res=>res.text())
+      .then(res=>
+        {
+          resultatCSV.innerHTML = '';
+          const sommets = res.split("\n");
+          sommets.forEach(sommet=>{
+            const champs = sommet.split(";");
+            resultatCSV.innerHTML += `${champs[1]} ${champs[2]} ${champs[0]}<br>`;
+          })
+        })
+        .catch(erreur=>console.warn(erreur))
+      })
+      </script>
+</html>

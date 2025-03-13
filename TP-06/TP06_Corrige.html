@@ -1,0 +1,82 @@
+<meta charset="utf8">
+<h1>TP 6 - Corrigé</h1>
+<h2>Exercice 1</h2>
+<input type="text" id="nom">
+<input type="text" id="npa">
+<hr>
+<h2>Exercice 2</h2>
+Nombre de visites sur la page: <span id="nbVisites"></span>
+<hr>
+<h2>Exercice 3</h2>
+<input type="text" id="saisie">
+<button id="btnAjouter">Ajouter</button>
+<br>
+<ul id="panier"></ul>
+
+<script>
+
+    // Exercice 1
+    // Voir si des données sont enregistrées
+    if (localStorage.getItem('personne')){
+        // Lire et parser
+        const personne = JSON.parse(localStorage.getItem('personne'));
+        // Afficher les valeurs dans les inputs
+        nom.value = personne.nom;
+        npa.value = personne.npa;
+    }
+    nom.addEventListener('keyup', enregistrer);
+    npa.addEventListener('keyup', enregistrer);    
+    function enregistrer() {
+        const personne = {
+            nom:nom.value,
+            npa:npa.value
+        }
+        localStorage.setItem('personne', JSON.stringify(personne));
+    }   
+
+    // Exercice 2
+    let nombreVisites = 1;
+    // Voir si le nombre a déjà été enregistré
+    if (localStorage.getItem('nombreVisites')) {
+        // Reprendre et incrémenter
+        nombreVisites = parseInt(localStorage.getItem('nombreVisites')) +1;
+    }
+    // Stocker le nombre
+    localStorage.setItem('nombreVisites', nombreVisites);
+    // Afficher le nombre
+    nbVisites.innerHTML = nombreVisites;
+
+    // Exercice 3
+    let panierTab = [];
+    // Voir si le panier a été stocké
+    if (localStorage.getItem('panier')) {
+        // Reprendre le panier
+        panierTab = JSON.parse(localStorage.getItem('panier'));
+        // Afficher le panier
+        afficherPanier();
+    }
+    btnAjouter.addEventListener('click', _=>{
+        if (saisie.value.length==0) return;
+        // Ajouter
+        panierTab.push(saisie.value);
+        // Trier
+        panierTab.sort();
+        // Enregistrer
+        localStorage.setItem('panier', JSON.stringify(panierTab));
+        // Afficher
+        afficherPanier();
+        
+    })
+
+    function afficherPanier() {
+        // Supprimer affichage actuel
+        while (panier.hasChildNodes()) {
+            panier.removeChild(panier.firstChild);
+        }
+        panierTab.forEach(produit=>{
+            let li = document.createElement('li');
+            li.appendChild(document.createTextNode(produit));
+            panier.appendChild(li);
+        })
+    }
+</script>

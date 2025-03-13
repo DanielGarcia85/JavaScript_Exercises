@@ -1,0 +1,53 @@
+<meta charset="utf-8">
+<h3>Le juste prix (entre 1 et 100)</h3>
+<input type="text" id="prixPropose" placeholder="Votre proposition de prix">
+<button id="btnOk">Ok</button>
+<br>
+<div id="resultat"></div>
+<br>
+<button id="btnAnnuler">Annuler</button>
+<br>
+<button id="btnRejouer">Rejouer</button>
+<script>
+  let prix;
+  // Exercice 2 avec compteur qui sera incrémenté et affiché à chaque tentative
+  let compteur = 0;
+
+  // Exercice 3 avec indication selon la proposition, le min et max sont mis à jour à chaque proposition
+  let min = 1;
+  let max = 100;
+
+  btnOk.addEventListener('click', testerProposition)
+  btnAnnuler.addEventListener('click', annuler)
+  btnRejouer.addEventListener('click', rejouer)
+
+  rejouer();
+
+  function testerProposition() {
+    compteur++;
+    if (prixPropose.value < min || prixPropose.value > max) {
+      resultat.innerHTML += `Votre proposition ne fait pas de sens!<br>`;
+    }
+    if (prixPropose.value < prix) {
+      resultat.innerHTML += `Essai ${compteur} - Votre proposition ${prixPropose.value} : C'est plus<br>`;
+      min = prixPropose.value;
+    } else if (prixPropose.value > prix) {
+      resultat.innerHTML += `Essai ${compteur} - Votre proposition ${prixPropose.value} : C'est moins<br>`;
+      max = prixPropose.value;
+    } else {
+      resultat.innerHTML += `Essai ${compteur} - Bravo ${prixPropose.value} est le juste prix!<br>`;
+    }
+  }
+
+  function annuler() {
+    resultat.innerHTML +=`Vous avez annulé le jeux. Le juste prix était ${prix}`;
+  }
+
+  function rejouer() {
+    prix = 1 + Math.floor(Math.random()*101);
+    prixPropose.value = "";
+    resultat.innerHTML = "";
+  }
+
+
+</script>

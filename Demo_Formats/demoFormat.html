@@ -1,0 +1,43 @@
+<script>
+    // Pour le CSV
+    fetch('client.csv')
+    .then(res=>res.text())
+    .then(res=>{
+        console.log(res)
+        // Transformer en lignes
+        const clients = res.split("\n");
+        console.log(clients)
+        clients.forEach(client=>{
+            const champs = client.split(";")
+            console.log(champs[0], champs[1], champs[2], )
+        })
+    })
+    // Pour le XML
+    fetch('client.xml')
+    .then(res=>res.text())
+    .then(res=>{
+        console.log(res)
+        // Transformer en XML
+        const parser = new DOMParser()
+        const xml = parser.parseFromString(res,"text/xml")
+        return xml
+    })
+    .then(res=>{
+        console.log(res)
+        // Pour extraire toutes les balises "telephone" (et avec Array.from transformer en liste (array))
+        const telephones = Array.from(res.getElementsByTagName("telephone"))
+        telephones.forEach(telephone=>{
+            console.log(telephone.firstChild.nodeValue)
+        })
+        // Pour extraire toutes les données
+        const clients = Array.from(res.getElementsByTagName("client"))
+        clients.forEach(client=>{
+            const nom = client.getElementsByTagName('nom')[0].firstChild.nodeValue
+            const prenom = client.getElementsByTagName('prenom')[0].firstChild.nodeValue
+            const telephone = client.getElementsByTagName('telephone')[0].firstChild.nodeValue
+            console.log(nom, prenom, telephone)
+        })
+
+    })
+
+</script>

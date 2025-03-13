@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Canvas</title>
+</head>
+
+<body>
+
+<h1>TP 9 - Canvas</h1>
+
+<h2>Exercice 1</h2>
+
+<canvas id="monCanvas" width="100" height="100" style="border: 1px solid black"></canvas>
+
+<h2>Exercice 2</h2>
+
+<button id="btn_dessiner">Dessiner</button>
+<br>
+<canvas id="canvas2" width="300" height="200" style="border: 1px solid black"></canvas>
+<canvas id="canvas3" width="300" height="200" style="border: 1px solid black"></canvas>
+<br>
+<canvas id="canvas4" width="300" height="200" style="border: 1px solid black"></canvas>
+<br>
+<button id="btn_animer">Animer</button>
+
+<script>
+
+    //Exercice 1
+    let ctx = monCanvas.getContext("2d")
+    ctx.fillStyle = "rgba(255, 0, 0, 1)"
+    ctx.fillRect(25, 25, 50, 50)
+    ctx.fillStyle = "rgba(0, 0, 200, 0.5)"
+    ctx.fillRect(60, 30, 30, 60)
+
+    //Exercice 2
+    btn_dessiner.addEventListener("click", ()=>{
+
+        let ctx = canvas2.getContext("2d")
+
+        ctx.beginPath()
+        ctx.fillStyle = "rgba(255, 0, 0, 1)"
+        ctx.fillRect(0, 100, 200, 30)
+        ctx.strokeRect(10, 50, 60, 30)
+        ctx.closePath()
+        
+        ctx.beginPath()
+        ctx.arc(100, 100, 20, 0, 2*Math.PI)
+        ctx.stroke()
+        ctx.fill()
+        ctx.closePath()
+
+        ctx.beginPath()
+        ctx.moveTo(150, 150)
+        ctx.lineTo(175, 200)
+        ctx.lineTo(125, 200)
+        ctx.lineTo(150, 150)
+        ctx.stroke()
+        ctx.closePath()
+
+        // Exercice 3
+        let ctx2 = canvas3.getContext("2d")
+        ctx2.beginPath()
+        ctx2.fillStyle = "rgba(255, 0, 0, 1)"
+        ctx2.moveTo(150, 150)
+        ctx2.lineTo(175, 150)
+        ctx2.lineTo(175, 125)
+        ctx2.lineTo(200, 125)
+        ctx2.stroke()
+        ctx2.closePath()
+
+        const canvas = document.getElementById('canvas3');
+        const ctx3 = canvas.getContext('2d');
+        // Définir la taille des marches
+        const stepWidth = 50;
+        const stepHeight = 30;
+        const numSteps = 10;
+        // Couleur des marches
+        ctx3.fillStyle = "rgba(0, 0, 255, 1)";
+        // Position initiale
+        let x = 0;
+        let y = canvas.height - stepHeight;
+        // Dessiner les marches
+        for (let i = 0; i < numSteps; i++) {
+            ctx3.fillRect(x, y, stepWidth, stepHeight);
+            x += stepWidth;
+            y -= stepHeight;
+        }
+    })
+
+    // Exercice 4
+    const canva4 = document.getElementById('canvas4');
+    const ctx4 = canva4.getContext('2d');
+    ctx4.fillStyle = "rgba(255, 0, 0, 1)";
+    let x = canvas4.width/2; // Position initiale du cercle
+    let y = canvas4.height/2; // Position initiale du cercle
+    const radius = 20; // Rayon du cercle
+    let dx = 2; // Déplacement en x
+    let dy = 2; // Déplacement en y
+    btn_animer.addEventListener("click", ()=>{
+        let interval = setInterval(() => {
+            x += dx;
+            y += dy;
+            if (x + radius > canvas4.width || x - radius < 0) {
+                    dx = -dx;
+            }
+            if (y + radius > canvas4.height || y - radius < 0) {
+                    dy = -dy;
+            }
+            dessinerCercle()
+        }, 10);
+    })
+    function dessinerCercle(){
+        ctx4.clearRect(0, 0, canvas4.width, canvas4.height);
+        ctx4.beginPath();
+        ctx4.arc(x, y, radius, 0, 2 * Math.PI);
+        ctx4.fillStyle = "rgba(255, 0, 0, 1)";
+        ctx4.fill();
+        ctx4.stroke();
+        ctx4.closePath();
+    }
+
+</script>
+
+</body>
