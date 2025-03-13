@@ -1,106 +1,26 @@
 <!DOCTYPE html>
-<html lang='en'>
-    <head>
-        <meta charset='UTF-8'>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <title>TP-6 Stockage</title>
-    </head>
-    <body>
-        <h1>Exercice 1</h1>
-        <input type='text' id='nom' placeholder='Saisir nom'>
-        <input type='text' id='npa' placeholder='Saisir code postale'>
-        
-        <h1>Exercice 2</h1>
-        <label>Compteur : </label>
-        <span id='compteur'></span>
+<html lang='fr'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>TP-6 Stockage</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-        <h1>Exercice 3</h1>
-        <input type='text' id='produit' placeholder='Saisir un produit'>
-        <button id="btn_ajouter">Ajouter</button>
-        <ul id="panierUl"></ul>
+    <h1>Exercice 1</h1>
+    <input type='text' id='nom' placeholder='Saisir nom'>
+    <input type='text' id='npa' placeholder='Saisir code postal'>
 
-    </body>
-    <script>
-        //EXERCICE 1//
-        // Lire lors du chargement
-        if(localStorage.getItem('nom')){
-            nom.value = localStorage.getItem('nom')
-        }
-        if(localStorage.getItem('npa')){
-            npa.value = localStorage.getItem('npa')
-        }
-        // Créer les EventListner
-        nom.addEventListener('keyup', remplirLocaStorage)
-        npa.addEventListener('keyup', remplirLocaStorage)
-        // Remplir le Local Storage
-        function remplirLocaStorage(){
-            const nomInput = document.getElementById('nom').value
-            const npaInput = document.getElementById('npa').value
-            localStorage.setItem('nom', nomInput)
-            localStorage.setItem('codePostale', npaInput)
-        }
+    <h1>Exercice 2</h1>
+    <label>Compteur : </label>
+    <span id='compteur'></span>
 
-        //EXERCICE 2//
-        let cpt
-        if(localStorage.getItem('cpt')){
-            cpt = localStorage.getItem('cpt')
-            cpt++
-        } else {
-            cpt = 1
-        }
-        localStorage.setItem('cpt', cpt)
-        compteur.appendChild(document.createTextNode(cpt))
+    <h1>Exercice 3</h1>
+    <input type='text' id='produit' placeholder='Saisir un produit'>
+    <button id="btn_ajouter">Ajouter</button>
+    <ul id="panierUl"></ul>
 
-
-        //EXERCICE 3//
-        //let liste = [{id:1,nom:'Dupont'}, {id:2,nom:'Durand'}, {id:3,nom:'Dumond'}]
-        //localStorage.setItem('liste', JSON.stringify(liste))
-        //console.log(JSON.parse(localStorage.getItem('liste')))
-        
-        let panierTab = []
-        let produit = document.getElementById("produit")
-        if(localStorage.getItem("panier")){
-            panierTab = JSON.parse(localStorage.getItem("panier"));
-        }
-
-        afficherPanier();
-        
-        btn_ajouter.addEventListener("click", ()=>{
-            remplirPanier()
-            afficherPanier()
-        })
-
-        panierUl.addEventListener('click', (e)=>{
-            if(e.target.nodeName === "LI"){                
-                supprimerProduitDuPanier(e)
-                afficherPanier()
-            }  
-        })
-
-        function remplirPanier(){
-            panierTab.push(produit.value)     
-            panierTab.sort
-            localStorage.setItem('panier', JSON.stringify(panierTab)) 
-            console.log(panierTab)   
-        }
-        
-        function supprimerProduitDuPanier(e){
-            panierTab = panierTab.filter(product => product !== e.target.textContent);
-            console.log(panierTab)
-            localStorage.setItem('panier', JSON.stringify(panierTab));
-        }
-
-        function afficherPanier(){
-            while(panierUl.firstChild){
-                panierUl.removeChild(panierUl.firstChild)
-            }
-            panierTab.forEach(product =>{
-                let li = document.createElement('li')
-                li.textContent = product
-                panierUl.appendChild(li)
-            })  
-        }
-
-    </script>
-
+    <script src="script.js"></script>
+</body>
 </html>

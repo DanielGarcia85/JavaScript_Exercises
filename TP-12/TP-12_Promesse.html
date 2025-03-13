@@ -1,118 +1,16 @@
 <!DOCTYPE html>
-<html lang='en'>
-    <head>
-        <meta charset='UTF-8'>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <title>Promesse</title>
-    </head>
-    <body>
-        <h1>Exercice 1-4</h1>
-        <h4>Regardez dans la console</h4>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promesse</title>
+</head>
+<body>
 
-    </body>
-    <script>
-        
-        // Syntaxe classique d'une fonction
-        function maPromesseOld(nom){
-            return null;
-        }
+    <h1>Exercice 1-4</h1>
+    <h4>Regardez dans la console</h4>
 
-        // Nouvelle syntaxe d'une fonction. Qu'on ne peut pas écraser.
-        // Je crée un fonction "maPromesse qui me retourne une Promise"
-        const maPromesse = (nom) => {
+    <script src="script.js"></script>
 
-            // Je crée un timer pour le temps de mon SetTimeOut
-            let timeout = Math.random() * 1.5 + 0.5;
-
-            // Je retourne une Promesse qui retourne aléatoirement réussi (80%) ou échoué (20%)
-            return new Promise((siOk, siPasOk)=>{
-                
-                setTimeout(()=>{
-
-                    if(Math.random()<0.8){
-                        siOk(`${nom} réussi`)
-                    }else{
-                        siPasOk(`${nom} échoué`)
-                    }
-
-                }, timeout)
-
-            })
-
-        }
-
-        console.log("Test d'affichage console intérmédiaire 1")
-
-        
-        // Appel à  ma fonction maPromesse 3 fois de suite qui me retourne un Promise
-        // Mais on ne sait pas laquel va répondre la première à cause du SetTimeOut aléatoire
-        maPromesse("Test1")
-        .then(res=>console.log(res))
-        .catch(erreur=>console.log(erreur))
-
-        maPromesse("Test2")
-        .then(res=>console.log(res))
-        .catch(erreur=>console.log(erreur))
-
-        maPromesse("Test3")
-        .then(res=>console.log(res))
-        .catch(erreur=>console.log(erreur))
-        
-
-        console.log("Test d'affichage console intérmédiaire 2")
-
-        
-        // Ici on utilise une méthode statique qui va nous permettre d'attendre que toutes les promesses soit réalisées
-        Promise.all([ maPromesse("Test4"),  maPromesse("Test5"),  maPromesse("Test6")])
-            // on peut récupère tous les résultats ensemble sous forme d'un tableau
-        .then(res=>{
-            console.log("c'est fini : " + res)
-        })
-            // ou bien chacun individuellement
-        .then(([res1, res2, res3])=>{
-            console.log("c'est fini : " + res1, res2, res3)
-        })
-        .catch(erreur=>console.log(erreur))
-        
-
-        console.log("Test d'affichage console intérmédiaire 3")
-
-        // Ici on utilise une méthode statique qui va nous permettre d'attendre que la première promesse soit réalisé
-        Promise.race([maPromesse("Test7"),  maPromesse("Test8"),  maPromesse("Test9")])
-        .then((res)=>{
-            console.log("c'est fini : " + res)
-        })
-        .catch(erreur=>console.log(erreur))
-
-        console.log("Test d'affichage console intérmédiaire 4")
-
-        Promise.all([
-            fetch('https://jsonplaceholder.typicode.com/users').then(r => r.json()),
-            fetch('https://jsonplaceholder.typicode.com/posts').then(r => r.json())
-        ])
-        .then(([users, posts]) => {
-
-            // Association des posts avec les utilisateurs
-            const postsWithAuthors = posts.map(post => {
-                const author = users.find(user => user.id === post.userId);
-                return { ...post, authorName: author ? author.name : 'Auteur inconnu' };
-            });
-                /* 
-                La même chose mais avec un forEach à la place du map
-                // Créer un tableau pour les posts avec auteurs
-                const postsWithAuthors = [];
-                // Utiliser forEach pour transformer chaque post
-                posts.forEach(post => {
-                    const author = users.find(user => user.id === post.userId);
-                    postsWithAuthors.push({ ...post, authorName: author ? author.name : 'Auteur inconnu' });
-                });
-                */
-            // Affichage des posts avec les noms des auteurs
-            postsWithAuthors.forEach(post => {
-                console.log(`Post: ${post.title}, Auteur: ${post.authorName}`);
-            });
-
-        });
-        
-
-    </script>
+</body>
+</html>

@@ -1,54 +1,17 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='fr'>
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>TP-8 - Déplacement</title>
-    <style>
-        .draggable {
-            width: 100px;
-            height: 100px;
-            position: absolute;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
     <div class="draggable" id="green" style="background-color:green; left: 0px; top: 0px"></div>
     <div class="draggable" id="red" style="background-color:red; left: 0px; top: 0px"></div>
     <div class="draggable" id="blue" style="background-color:blue; left: 0px; top: 0px"></div>
-</body>
-<script>
-    // Référence vers la div en déplacement
-    let div = false
-    // Marges entre le bord de la div et le curseur
-    let offsetX, offsetY
-    let interval
-    // Début du déplacement
-    document.addEventListener('mousedown', e=>{
-        if(e.target.nodeName === "DIV"){
-            div = e.target
-            // Calcul des marges
-            offsetX = e.clientX - parseInt(div.style.left)
-            offsetY = e.clientY - parseInt(div.style.top)
-        }
-    })
-    // Fin du déplacement
-    document.addEventListener('mouseup', e=>{
-        div = false
-    })
-    // Mouvement du curseur
-    document.addEventListener('mousemove', e=>{
-        if(div){
-            div.style.left = (e.clientX - offsetX) + 'px'
-            div.style.top = (e.clientY -offsetY) + 'px'
-            clearInterval(interval)
-            interval = setInterval(()=>{
-                Array.from(document.getElementsByTagName('div')).forEach(d=>{
-                    d.style.left = 0
-                    d.style.top = 0
-                })
-            }, 2000)
-        }
-    })
 
-</script>
+    <script src="script.js"></script>
+</body>
+</html>

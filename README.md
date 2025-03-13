@@ -1,16 +1,16 @@
 # JavaScript Learning Exercises
-This repository contains a series of exercises designed to help learn JavaScript, covering syntax, DOM manipulation, event handling, AJAX, asynchronous programming, and object-oriented JavaScript.
+This repository contains a series of exercises designed to help learn JavaScript, covering syntax, DOM manipulation, event handling, AJAX, asynchronous programming, and object-oriented JavaScript.  
 It was created as part of the course ***64-31 Internet Programming*** at **Haute École de Gestion (HEG)**.
 
 ## Features
-JavaScript Basics: Syntax, data types, and operators.
-DOM Manipulation: Accessing and modifying HTML elements dynamically.
-Event Handling: Managing user interactions with event listeners.
-Timers & Animations: Using setTimeout, setInterval, and animations.
-AJAX & Fetch API: Making HTTP requests and processing responses.
-Canvas API: Drawing and rendering graphics with JavaScript.
-Storage & Data Handling: Local storage, session storage, and JSON.
-Object-Oriented Programming (OOP): Implementing classes and objects in JavaScript.
+- JavaScript Basics: Syntax, data types, and operators.
+- DOM Manipulation: Accessing and modifying HTML elements dynamically.
+- Event Handling: Managing user interactions with event listeners.
+- Timers & Animations: Using setTimeout, setInterval, and animations.
+- AJAX & Fetch API: Making HTTP requests and processing responses.
+- Canvas API: Drawing and rendering graphics with JavaScript.
+- Storage & Data Handling: Local storage, session storage, and JSON.
+- Object-Oriented Programming (OOP): Implementing classes and objects in JavaScript.
 
 ## Project Structure
 - Demo_Canva/ : Introduction to the Canvas API.

@@ -1,0 +1,36 @@
+body {
+ font-family: Arial, sans-serif;
+ padding: 20px;
+ background-color: #f9f9f9;
+}
+
+p {
+ font-size: 16px;
+ color: #333;
+}
+
+input {
+ margin: 10px 0;
+ padding: 5px;
+ width: 80px;
+}
+
+button {
+ padding: 8px 12px;
+ background-color: #007bff;
+ color: white;
+ border: none;
+ cursor: pointer;
+}
+
+button:hover {
+ background-color: #0056b3;
+}
+
+canvas {
+ border: 1px solid grey;
+ background: url('suisse.png') no-repeat center center;
+ background-size: cover;
+ display: block;
+ margin-top: 10px;
+}

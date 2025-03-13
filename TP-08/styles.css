@@ -1,0 +1,12 @@
+.draggable {
+ width: 100px;
+ height: 100px;
+ position: absolute;
+ cursor: grab;
+ border-radius: 5px;
+ transition: all 0.2s ease-in-out;
+}
+
+.draggable:active {
+ cursor: grabbing;
+}

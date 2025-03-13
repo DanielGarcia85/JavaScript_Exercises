@@ -1,77 +1,16 @@
 <!DOCTYPE html>
-<html lang='en'>
-    <head>
-        <meta charset='UTF-8'>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <title>Classe</title>
-    </head>
-    <body>
-        <h1>Exercice 1</h1>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classe en JavaScript</title>
+</head>
+<body>
 
-    </body>
-    <script>
-        // EXERCIE 1
-        // =========
-        class Forme {
-            constructor({ x = 10, y = 20, l = 40, h = 30, couleur = 'red' } = {}) {
-                this.position = { x, y };
-                this.taille = { l, h };
-                this.couleur = couleur;
-            }
+    <h1>Exercice 1 - Manipulation d'une Classe en JavaScript</h1>
+    <h3>Ouvrez la console pour voir les résultats</h3>
 
-            // EXERCICE 2
-            // ==========
-            // Méthode pour modifier la taille par un facteur
-            modifierTaille(facteur) {
-                this.taille.l *= facteur;
-                this.taille.h *= facteur;
-            }
-            // Méthode pour obtenir l'attribut 'position'
-            getPosition() {
-                return this.position;
-            }
-            // Méthode pour modifier l'attribut 'position'
-            setPosition(x, y) {
-                this.position.x = x;
-                this.position.y = y;
-            }
-            // Méthode pour obtenir l'attribut 'taille'
-            getTaille() {
-                return this.taille;
-            }
+    <script src="script.js"></script>
 
-            // Méthode pour modifier l'attribut 'taille'
-            setTaille(l, h) {
-                this.taille.l = l;
-                this.taille.h = h;
-            }
-
-            // Méthode pour obtenir l'attribut 'couleur'
-            getCouleur() {
-                return this.couleur;
-            }
-
-            // Méthode pour modifier l'attribut 'couleur'
-            setCouleur(couleur) {
-                this.couleur = couleur;
-            }
-        }
-
-        // Exemple d'utilisation
-        const forme1 = new Forme();
-        console.log(forme1); // Forme { position: { x: 10, y: 20 }, taille: { l: 40, h: 30 }, couleur: 'red' }
-
-        // Modifier la taille par un facteur de 2 (double la taille)
-        forme1.modifierTaille(2);
-        console.log(forme1.getTaille()); // { l: 80, h: 60 }
-
-        // Obtenir et modifier les attributs
-        console.log(forme1.getPosition()); // { x: 10, y: 20 }
-        forme1.setPosition(100, 200);
-        console.log(forme1.getPosition()); // { x: 100, y: 200 }
-
-        console.log(forme1.getCouleur)
-
-    
-
-    </script>
+</body>
+</html>
