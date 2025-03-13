@@ -1,39 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
-    <title>CALCULATRICE</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .calculatrice {
-            width: 300px;
-            margin: auto;
-            border: 1px solid #ccc;
-            padding: 10px;
-            box-shadow: 0px 0px 10px #aaa;
-            border-radius: 5px;
-            text-align: center;
-        }
-        input[type="text"] {
-            margin: 5px;
-            width: calc(100% - 20px);
-        }
-        button {
-            width: 30px;
-            height: 20px;
-        }
-        .btn_reinitialiser
-        {
-            margin-top: 10px;
-            width: 100px;
-        }
-        .resultat {
-            margin-top: 10px;
-        }
-    </style>
+    <title>Calculatrice</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -60,86 +30,7 @@
             <span id="resultat">Résultat: </span>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
-
-<script>
-    
-    btn_additionner.addEventListener("click", ()=> {calculer(btn_additionner.value)});
-    btn_soustraire.addEventListener("click", ()=> {calculer(btn_soustraire.value)});
-    btn_multiplier.addEventListener("click", ()=> {calculer(btn_multiplier.value)});
-    btn_diviser.addEventListener("click", ()=> {calculer(btn_diviser.value)});
-    btn_racine.addEventListener("click", ()=> {calculer(btn_racine.value)});
-    btn_puissance.addEventListener("click", ()=> {calculer(btn_puissance.value)});
-    btn_log.addEventListener("click", ()=> {calculer(btn_log.value)});
-    btn_exp.addEventListener("click", ()=> {calculer(btn_exp.value)});
-    btn_reinitialiser.addEventListener("click", reinitialiser)
-    
-    function calculer(operateur){
-        
-        const valeur1 = parseFloat(document.getElementById('nombre1').value);
-        const valeur2 = parseFloat(document.getElementById('nombre2').value);
-        var resultat;
-
-        if(validerInput()){
-            switch(operateur){
-            case '+':
-                resultat = valeur1 + valeur2;
-                break;
-            case '-':
-                resultat = valeur1 - valeur2;
-                break;
-            case '*':
-                resultat = valeur1 * valeur2;
-                break;
-            case '/':
-                if (valeur2 !== 0) {
-                    resultat = valeur1 / valeur2;
-                } else {
-                    resultat = "Division par 0 impossible";
-                }
-                break;
-            case 'racine':
-                resultat = Math.pow(valeur1, 1/valeur2); // Math.sqrt(valeur1);
-                break;
-            case 'puissance':
-                resultat = Math.pow(valeur1, valeur2);
-                break;
-            case 'log':
-                if (valeur2 <= 0 || valeur2 === 1 || valeur1 <= 0) {
-                    resultat = 'Les bases doivent être > 0 et ≠ 1, et la valeur doit être > 0';
-                } else {
-                    resultat = Math.log(valeur2) / Math.log(valeur1);
-                }
-                break;
-            case 'exponentiel':
-                resultat = Math.exp(valeur1);
-                break;
-            default:
-                resultat = 'Opération non reconnue';
-            }
-            document.getElementById('resultat').innerText = "Résultat: " + resultat;
-        }else{
-            document.getElementById('resultat').innerText = "Erreur : Entrées invalides";
-            console.log("Erreur : Entrées invalides");
-            alert("Erreur : Entrées invalides");
-        }
-                
-    }
-
-    function reinitialiser(){
-        document.getElementById('nombre1').value = "";
-        document.getElementById('nombre2').value = "";
-        document.getElementById('resultat').innerHTML = "";
-    }
-
-    function validerInput(){
-        const valeur1 = document.getElementById('nombre1').value.trim();
-        const valeur2 = document.getElementById('nombre2').value.trim();
-        if (valeur1 !== "" && valeur2 !== "" && !isNaN(parseFloat(valeur1)) && !isNaN(parseFloat(valeur2))) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-</script>
+</html>

@@ -3,128 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>TP-5 DOM</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        .calculatrice {
-            width: 300px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            box-shadow: 0px 0px 10px #aaa;
-            border-radius: 5px;
-            text-align: center;
-        }
-        input[type="text"] {
-            margin: 5px;
-            width: calc(100% - 20px);
-        }
-        input[type="button"] {
-            margin: 5px;
-        }
-        .resultat {
-            margin-top: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
     <h1>TP 05 - DOM</h1>
     <hr>
+
+    <!-- Exercice 1 -->
     <h2>Exercice 1</h2>
     <input id="inputText" placeholder="Entrez un texte">
     <button id="btn_ajouter">Ajouter</button>
     <ul id="liste"></ul>
-    <script>
-        document.getElementById('btn_ajouter').addEventListener('click', ()=>{
-            let input = document.getElementById('inputText').value
-            if(input !== ""){
-                let ul = document.getElementById('liste')
-                let li = document.createElement('li')
-                li.textContent = input
-                ul.appendChild(li)
-                inputText.value = ""
-                inputText.focus()
-            }
-        })
-    </script>
 
+    <!-- Exercice 2 -->
     <h2>Exercice 2</h2>
     <button id="btn_supprimer_dernier">Supprimer le dernier</button>
     <button id="btn_supprimer_premier">Supprimer le premier</button>
     <button id="btn_supprimer_tous">Supprimer tous</button>
-    <script>
-         document.getElementById('btn_supprimer_dernier').addEventListener('click', ()=>{
-            if (liste.children.length > 0) {
-                liste.removeChild(liste.lastChild);
-            }
-         })
-         document.getElementById('btn_supprimer_premier').addEventListener('click', ()=>{
-            if (liste.children.length > 0) {
-                liste.removeChild(liste.firstChild);
-            }
-         })
-         document.getElementById('btn_supprimer_tous').addEventListener('click', ()=>{
-            while(liste.firstChild){
-                liste.removeChild(liste.firstChild);
-            }
-            /* Ou
-            for (let i = liste.children.length; i > 0; i--) {
-                liste.removeChild(liste.firstChild);
-            }
-            */
-         })
 
-    </script>
-
+    <!-- Exercice 3 -->
     <h2>Exercice 3</h2>
     <select id="marques">
         <option value="bmw">BMW</option>
         <option value="mercedes">Mercedes</option>
     </select>
     <select id="modeles"></select>        
-    <script>
-        const bmwModels = ['X1', 'X2', 'X3', 'X4', 'X5']
-        const mercedesModels = ['Classe C', 'Classe E', 'Classe S']
-        document.getElementById('marques').addEventListener('change', ()=>{
-            const modeles = document.getElementById('modeles');
-            while(modeles.firstChild){
-                modeles.removeChild(modeles.firstChild)
-            }
-            if(marques.value=="bmw"){
-                bmwModels.forEach(model=>{
-                    let option = document.createElement('option');
-                    option.value = model.toLowerCase();
-                    option.textContent = model;
-                    console.log(option)
-                    modeles.appendChild(option);
-                })
-            }
-            if(marques.value=="mercedes"){
-                mercedesModels.forEach(model=>{
-                    let option = document.createElement('option');
-                    option.value = model.toLowerCase();
-                    option.textContent = model;
-                    console.log(option)
-                    modeles.appendChild(option);
-                })
-            }
-        })
-    </script>
 
+    <!-- Exercice 4 -->
     <h2>Exercice 4</h2>
-    <script>
-        liste.addEventListener('click', (e)=>{
-        if(e.target.nodeName === 'LI'){
-            liste.removeChild(e.target)
-        }
-        })
-    </script>
 
+    <!-- Exercice 5 -->
     <h2>Exercice 5</h2>
-    <div id = calculatrice class="calculatrice">
+    <div class="calculatrice">
         <h2>Calculatrice</h2>
         <input type="text" id="nombre1" placeholder="Insérer nombre 1">
         <br>
@@ -139,84 +51,14 @@
         <button id="btn_log" value="log">log<sub>x</sub></button>
         <button id="btn_exp" value="exponentiel">e<sup>x</sup></button>
         <br>
-        <button id="btn_reinitialiser" class="btn_reinitialiser" value="reinitialiser">Réinitialiser</button>
+        <button id="btn_reinitialiser" class="btn_reinitialiser">Réinitialiser</button>
         <br>
         <div class="resultat">
             <span id="resultat">Résultat: </span>
         </div>
     </div>
-    <script>
-        calculatrice.addEventListener('click', (e)=>{
-            if(e.target.nodeName === 'BUTTON'){
-                calculer(e.target.value)
-                console.log(e.target.value)
-            }
-        })
-        function calculer(operateur){
-            const valeur1 = parseFloat(document.getElementById('nombre1').value);
-            const valeur2 = parseFloat(document.getElementById('nombre2').value);
-            var resultat;
-            if(validerInput()){
-                switch(operateur){
-                case '+':
-                    resultat = valeur1 + valeur2;
-                    break;
-                case '-':
-                    resultat = valeur1 - valeur2;
-                    break;
-                case '*':
-                    resultat = valeur1 * valeur2;
-                    break;
-                case '/':
-                    if (valeur2 !== 0) {
-                        resultat = valeur1 / valeur2;
-                    } else {
-                        resultat = "Division par 0 impossible";
-                    }
-                    break;
-                case 'racine':
-                    resultat = Math.pow(valeur1, 1/valeur2); // Math.sqrt(valeur1);
-                    break;
-                case 'puissance':
-                    resultat = Math.pow(valeur1, valeur2);
-                    break;
-                case 'log':
-                    if (valeur2 <= 0 || valeur2 === 1 || valeur1 <= 0) {
-                        resultat = 'Les bases doivent être > 0 et ≠ 1, et la valeur doit être > 0';
-                    }   else {
-                        resultat = Math.log(valeur2) / Math.log(valeur1);
-                    }
-                    break;
-                case 'exponentiel':
-                    resultat = Math.exp(valeur1);
-                    break;
-                default:
-                    resultat = 'Opération non reconnue';
-                }   
-                document.getElementById('resultat').innerText = "Résultat: " + resultat;
-            }else{
-                document.getElementById('resultat').innerText = "Erreur : Entrées invalides";
-                console.log("Erreur : Entrées invalides");
-                alert("Erreur : Entrées invalides");
-            }       
-        }
 
-        function reinitialiser(){
-            document.getElementById('nombre1').value = "";
-            document.getElementById('nombre2').value = "";
-            document.getElementById('resultat').innerHTML = "";
-        }
-        function validerInput(){
-            const valeur1 = document.getElementById('nombre1').value.trim();
-            const valeur2 = document.getElementById('nombre2').value.trim();
-            if (valeur1 !== "" && valeur2 !== "" && !isNaN(parseFloat(valeur1)) && !isNaN(parseFloat(valeur2))) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    </script>
-
+    <!-- Exercice 6 -->
     <h2>Exercice 6</h2>
     <div id="vignettes">
         <img src="TP_05_images/chocolat1.jpeg" width="100px"/>
@@ -226,17 +68,7 @@
     </div>
     <br>
     <img id="image" src="" width="300px" />
-    <script>
-        vignettes.addEventListener('click', (e)=>{
-            Array.from(vignettes.children).forEach(v=>{
-                v.style.opacity = 1;
-            })
-            if(e.target.nodeName === 'IMG'){
-                image.src = e.target.src
-                e.target.style.opacity = 0.5; 
-            } 
-        })            
-    </script>
 
+    <script src="script.js"></script>
 </body>
-
+</html>

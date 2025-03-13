@@ -4,11 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>PANIER D'ACHAT</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -24,55 +20,17 @@
         <option value="ananas">Ananas</option>
         <option value="kiwi">Kiwi</option>
     </select>
-    <input id="inp_nbarticle" placeholder="Quantité"></input>
+    <input id="inp_nbarticle" placeholder="Quantité">
     <button id="btn_add">Ajouter</button>
+
     <h2>Exercice 2</h2>
     <label id="lbl_nbarticle">Nombre total d'article dans le panier : <span id="spn_nbarticle">0</span></label>
     <br>
-    <label id="lbl_listarticle">List des articles :</label>
+    <label id="lbl_listarticle">Liste des articles :</label>
     <br>
     <span id="spn_panier"></span>
 
+    <script src="script.js"></script>
 </body>
 
-<script>
-
-    let panier = []
-    let nbarticle = 0
-
-    btn_add.addEventListener("click", ()=> {
-        let article = document.getElementById('articleselected').value
-        let quantite = Number(document.getElementById('inp_nbarticle').value)
-        if(article == ""){
-            alert("Vous devez selectionner un article");
-        }else{
-            if(quantite == "" || isNaN(quantite)){
-                alert("Vous devez renseigner une quantité valide");
-            }else{
-                let art = panier.find((p)=>p.nom == article)
-                if(!art){
-                    art = {nom: article, qte: quantite}
-                    nbarticle += quantite
-                    panier.push(art)
-                    panier.sort((p1, p2)=>p1.nom.localeCompare(p2.nom))
-                }else{
-                    art.qte += quantite
-                    nbarticle += quantite
-                }
-                console.log(quantite)
-                console.log(panier)
-                afficherPanier()
-            }
-            
-        }  
-    });
-
-    function afficherPanier(){
-        spn_nbarticle.innerHTML = nbarticle
-        spn_panier.innerHTML = "";
-        panier.forEach((e)=> {
-            spn_panier.innerHTML += e.qte + " " + e.nom + "<br>"
-        }) 
-    }
-// 
-</script>
+</html>

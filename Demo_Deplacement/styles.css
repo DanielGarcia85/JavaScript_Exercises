@@ -1,0 +1,13 @@
+#maDiv {
+ background-color: aqua;
+ position: absolute;
+ width: 100px;
+ height: 50px;
+ left: 40px;
+ top: 50px;
+ cursor: grab;
+}
+
+#maDiv:active {
+ cursor: grabbing;
+}

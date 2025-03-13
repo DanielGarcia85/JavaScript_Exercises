@@ -1,63 +1,19 @@
-<h2>Démo Canvas</h2>
-<br>
-<button>Ok</button>
-<canvas id="monCanvas" width="300" height="300" 
-        style="border: 1px solid black"></canvas>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démo Canvas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-<script>
+    <h2>Démo Canvas</h2>
+    <br>
+    <button id="startBtn">Ok</button>
+    <canvas id="monCanvas" width="300" height="300"></canvas>
 
-    
-    let ctx = monCanvas.getContext("2d")    
-    let x = 150
-    let y = 150
-    let sens = 1
-    let vitesse = 2
-    setInterval(()=>{
-        x+= vitesse*sens 
-        //Option rebondir
-        if (x>280 || x<20) {            
-            sens *=-1
-            let r = Math.random()*255
-            let g = Math.random()*255
-            let b = Math.random()*255
-            let t = 0.1 + Math.random()*0.9
-            ctx.fillStyle = "rgba(" + r +", " + g + ", " + b + ", "+ r+")"
-        }
-        // Option apparaitre de l'autre côté
-        // if (x>320) x = -20
-        ctx.clearRect(0, 0, 300, 300)
-        ctx.beginPath()
-        ctx.arc(x, y, 20, 0, 2*Math.PI)
-        ctx.fill()
-        ctx.stroke()
-        ctx.closePath()
-    }, 10)
-    
-    // ctx.fillRect(150, 150, 80, 40)
-    // ctx.fillStyle = "rgba(0, 255, 0, 0.5)"
-    // ctx.fillRect(200, 180, 80, 40)
-    // ctx.strokeRect(200, 180, 80, 40)
-    // ctx.fillStyle = "rgba(0, 0, 255, 0.8)"
-    
-    // ctx.fill()
-    // ctx.stroke()
-    // ctx.closePath()
-    // ctx.moveTo(200, 200)
-    // ctx.lineTo(200, 300)
-    // ctx.lineTo(100,300)
-    // ctx.stroke()
-    // ctx.closePath()
-    // ctx.beginPath()
-    // ctx.arc(250, 250, 20, 0, 2*Math.PI)
-    // ctx.stroke()
-    // ctx.fill()
-    // ctx.closePath()
-    // ctx.moveTo(280, 255)
-    // ctx.lineTo(300, 295)
-    // ctx.lineTo(260, 295)
-    // ctx.lineTo(280, 255)
-    // ctx.stroke()
-    // ctx.fill()
-    // // ctx.line()
+    <script src="script.js"></script>
 
-</script>
+</body>
+</html>

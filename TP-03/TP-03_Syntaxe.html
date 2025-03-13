@@ -1,91 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <title>LE JUSTE PRIX</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
     <h1>TP 3 - Le juste prix</h1>
     <hr>
     <h4>Deviner un nombre entre 1 et 1000</h4>
     <input type="text" id="nombre" placeholder="Renseigner le nombre ici">
-    <button id="btn_soumettre" value="soumettre">Soumettre</button>
-    <button id="btn_recommencer" value="recommencer">Recommencer</button>
-    <button id="btn_abandonner" value="abandonner">Abandonner</button>
+    <button id="btn_soumettre">Soumettre</button>
+    <button id="btn_recommencer">Recommencer</button>
+    <button id="btn_abandonner">Abandonner</button>
     <br><br>
     <div id="tentative"></div>
     <div id="resultat"></div>
+    <script src="script.js"></script>
 </body>
-
-<script>
-    
-    btn_soumettre.addEventListener("click", ()=> {deviner(document.getElementById('nombre').value)})
-    btn_recommencer.addEventListener("click", recommencer);
-    btn_abandonner.addEventListener("click", abandonner);
-    let valeur = Math.floor(Math.random()*1000)+1;
-    let nbtentative = 1;
-    let min = 1;
-    let max = 1000;
-
-    nombre.addEventListener('keypress', (event)=> {
-        if (event.key === "Enter") {
-            document.getElementById('btn_soumettre').click();
-            document.getElementById('nombre').select();
-        }
-    });
-
-
-
-    function deviner(nombre){
-        console.log(valeur)
-        if(nombre<1 || nombre>1000){
-            tentative.innerHTML = `Tentative N° ${nbtentative}`;
-            nbtentative += 1;
-            resultat.innerHTML += `Le nombre est compris entre 1 et 1000<br>`;
-        }else{
-            if(nombre==valeur){
-                tentative.innerHTML = `Tentative N° ${nbtentative}`;
-                nbtentative = 0;
-                resultat.innerHTML = `Vous avez trouvé le juste prix : ${valeur}<br>`;
-            }else{
-                if(nombre<min || nombre>max){
-                    tentative.innerHTML = `Tentative N° ${nbtentative}`;
-                    nbtentative += 1;
-                    resultat.innerHTML += `Votre proposition n'a pas de sens<br>`;
-                }else{
-                    if(nombre<valeur){
-                        tentative.innerHTML = `Tentative N° ${nbtentative}`;
-                        nbtentative += 1;
-                        resultat.innerHTML += `Le nombre est plus grand que ${nombre}<br>`;
-                        min = nombre;
-                    }
-                    if(nombre>valeur){
-                        tentative.innerHTML = `Tentative N° ${nbtentative}`;
-                        nbtentative += 1;
-                        resultat.innerHTML += `Le nombre est plus petit que ${nombre}<br>`;
-                        max = nombre;
-                    }
-                }
-                
-            }
-        }
-    }
-
-    function recommencer(){
-        document.getElementById('nombre').value = "";
-        resultat.innerHTML = "";
-        tentative.innerHTML = "";
-        valeur = Math.floor(Math.random()*1000)+1;
-        nbtentative = 1;
-    }
-
-    function abandonner(){
-        document.getElementById('nombre').value = "";
-        resultat.innerHTML = `Vous avez abandonné. Le nombre était : ${valeur}<br>`;
-        tentative.innerHTML = "";
-        valeur = Math.floor(Math.random()*1000)+1;
-        nbtentative = 1;
-    }
-</script>
+</html>

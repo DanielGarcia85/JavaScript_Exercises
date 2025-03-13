@@ -1,0 +1,46 @@
+body {
+ font-family: Arial, sans-serif;
+ text-align: center;
+}
+
+.calculatrice {
+ width: 300px;
+ margin: auto;
+ border: 1px solid #ccc;
+ padding: 10px;
+ box-shadow: 0px 0px 10px #aaa;
+ border-radius: 5px;
+ text-align: center;
+ background: #f9f9f9;
+}
+
+input[type="text"] {
+ margin: 5px;
+ width: calc(100% - 20px);
+ padding: 5px;
+}
+
+button {
+ width: 40px;
+ height: 30px;
+ margin: 5px;
+ cursor: pointer;
+ font-weight: bold;
+}
+
+button:hover {
+ background: #ddd;
+}
+
+.btn_reinitialiser {
+ margin-top: 10px;
+ width: 100px;
+ background-color: #ff4444;
+ color: white;
+}
+
+.resultat {
+ margin-top: 10px;
+ font-weight: bold;
+ font-size: 18px;
+}

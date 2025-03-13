@@ -1,24 +1,16 @@
-<div id="maDiv" style="background-color: aqua;position: absolute;width: 100px;height: 50px;left: 40px;top: 50px"></div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Déplacement d'un élément</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-<script>
-    let modeDeplacement = false
-    let offsetLeft = 0
-    let offsetTop = 0
-    maDiv.addEventListener("mousedown", (evt)=>{
-        console.log(evt)
-        offsetLeft = evt.clientX - parseInt(maDiv.style.left)
-        offsetTop = evt.clientY - parseInt(maDiv.style.top)
-        modeDeplacement = true
-    })
-    maDiv.addEventListener("mouseup", ()=>{
-        modeDeplacement = false
-    })
+    <div id="maDiv"></div>
 
-    document.addEventListener("mousemove", (evt)=>{
-        if (modeDeplacement) {
-            maDiv.style.left = evt.clientX - offsetLeft
-            maDiv.style.top = evt.clientY - offsetTop
-        }
-    })
+    <script src="script.js"></script>
 
-</script>
+</body>
+</html>
